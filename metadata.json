@@ -1,0 +1,7 @@
+{
+  "name": "EcoLife 绿色生活助手",
+  "description": "基于数据的 AI 驱动可持续生活伴侣。具备碳足迹追踪、垃圾分类识别和绿色消费建议功能。",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
