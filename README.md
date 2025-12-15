@@ -64,7 +64,7 @@
 ## 快速开始 🚀
 
 1.  **获取 API Key**:
-    本项目依赖 Google Gemini API（已提供）。
+    本项目依赖 Google Gemini API。请前往 [Google AI Studio](https://aistudio.google.com/) 获取您的 API Key。
 
 2.  **配置环境**:
     在项目根目录设置环境变量 `API_KEY`（在当前演示环境中，API Key 通过 `process.env.API_KEY` 自动注入）。
@@ -76,7 +76,7 @@
 
 4.  **启动项目**:
     ```bash
-    npm run dev
+    npm start
     ```
 
 ---
