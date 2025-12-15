@@ -48,7 +48,7 @@
 
 ## 技术栈 🛠️
 
-*   **前端框架**: React 19
+*   **前端框架**: React 18 (Stable)
 *   **构建工具**: Vite (通过 esm.sh 引入)
 *   **样式库**: Tailwind CSS (响应式设计，不仅美观且适配移动端)
 *   **人工智能**: Google Gemini API (`gemini-2.5-flash` 模型)

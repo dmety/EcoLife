@@ -24,6 +24,36 @@ const LOCAL_QUIZZES: QuizData[] = [
     options: ["氧气", "氮气", "二氧化碳", "氢气"],
     answerIndex: 2,
     explanation: "二氧化碳 (CO2) 是最主要的人为温室气体，它会吸收地表辐射的热量，导致地球变暖。"
+  },
+  {
+    question: "废旧电池应该投放到哪个颜色的垃圾桶？",
+    options: ["蓝色", "绿色", "红色", "灰色"],
+    answerIndex: 2,
+    explanation: "废旧电池属于有害垃圾，应投放到红色的有害垃圾桶中，以免污染土壤和地下水。"
+  },
+  {
+    question: "每回收1吨废纸，大约可以挽救多少棵树？",
+    options: ["5棵", "17棵", "50棵", "100棵"],
+    answerIndex: 1,
+    explanation: "据统计，回收1吨废纸可造出850公斤好纸，挽救约17棵大树，节省3立方米木材。"
+  },
+  {
+    question: "以下哪种行为属于“低碳出行”？",
+    options: ["乘坐私家车", "乘坐飞机", "骑自行车", "驾驶大排量越野车"],
+    answerIndex: 2,
+    explanation: "骑自行车不消耗化石燃料，零排放，是典型的低碳出行方式。"
+  },
+  {
+    question: "过期的药物属于什么垃圾？",
+    options: ["可回收物", "厨余垃圾", "其他垃圾", "有害垃圾"],
+    answerIndex: 3,
+    explanation: "过期药品若随意丢弃会对环境造成污染，属于有害垃圾。"
+  },
+  {
+    question: "“碳中和”是指什么？",
+    options: ["停止排放二氧化碳", "通过植树等方式抵消排放量", "将碳埋在地下", "不再使用煤炭"],
+    answerIndex: 1,
+    explanation: "碳中和是指企业、团体或个人测算在一定时间内直接或间接产生的温室气体排放总量，通过植树造林、节能减排等形式，以抵消自身产生的二氧化碳排放量，实现二氧化碳“零排放”。"
   }
 ];
 
@@ -177,11 +207,32 @@ export const getGreenLivingAdvice = async (history: {role: string, parts: {text:
 };
 
 export const getEcoQuiz = async (): Promise<QuizData> => {
-  // Very short timeout (1.5s) for Quiz to ensure it feels "instant"
+  // Use a variety of topics to prevent repetitive questions
+  const topics = [
+    "中国垃圾分类标准 (例如红蓝绿灰桶的区别)",
+    "海洋塑料污染与治理",
+    "全球变暖、碳排放与温室效应",
+    "生物多样性保护 (例如濒危物种)",
+    "家庭节水节电的小技巧",
+    "新能源汽车与绿色交通",
+    "可降解材料与白色污染",
+    "零浪费生活方式 (Zero Waste)",
+    "电子垃圾的处理",
+    "有机农业与绿色食品"
+  ];
+  const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+
+  // Increase timeout to 4000ms to allow Gemini enough time to generate unique content.
+  // The UI preloads the next question, so this slight delay is acceptable.
   return safeExecute(async () => {
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
-      contents: "生成一个关于中国环保知识、垃圾分类、或可持续生活的单项选择题。返回JSON格式，包含：问题、4个选项、正确答案索引(0-3)、以及简短的解释。",
+      contents: `生成一个关于“${randomTopic}”的有趣的单项选择题。
+      要求：
+      1. 问题必须与“${randomTopic}”紧密相关。
+      2. 4个选项中只有一个正确。
+      3. 解释要生动有趣，能够科普知识。
+      4. 严格返回JSON格式。`,
       config: {
         responseMimeType: "application/json",
         responseSchema: {
@@ -198,7 +249,7 @@ export const getEcoQuiz = async (): Promise<QuizData> => {
     });
     if (response.text) return JSON.parse(response.text) as QuizData;
     throw new Error("Empty");
-  }, 1500, getLocalQuiz());
+  }, 4000, getLocalQuiz());
 };
 
 export const getCommunityData = async (locationContext: string = "中国城市"): Promise<CommunityData> => {

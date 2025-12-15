@@ -78,15 +78,6 @@ const App: React.FC = () => {
              <LeafIcon className="w-6 h-6" />
              <h1 className="text-lg font-bold tracking-tight">绿色生活</h1>
            </div>
-           {/* Quick Quiz Access Button for Mobile Header */}
-           {currentView !== AppView.QUIZ && (
-             <button 
-               onClick={() => setCurrentView(AppView.QUIZ)}
-               className="absolute right-4 text-xs font-bold bg-leaf-100 text-leaf-700 px-3 py-1.5 rounded-full"
-             >
-               挑战
-             </button>
-           )}
         </header>
 
         {/* Dynamic View Container */}

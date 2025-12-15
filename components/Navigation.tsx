@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppView } from '../types';
-import { LeafIcon, ChartIcon, ScanIcon, ChatIcon, UsersIcon, TrophyIcon, ProfileIcon } from './Icons';
+import { LeafIcon, ChartIcon, ScanIcon, ChatIcon, UsersIcon, TrophyIcon, ProfileIcon, BulbIcon } from './Icons';
 
 interface NavigationProps {
   currentView: AppView;
@@ -11,15 +11,16 @@ const Navigation: React.FC<NavigationProps> = ({ currentView, onViewChange }) =>
   const navItems = [
     { id: AppView.TRACKER, label: '碳追踪', icon: ChartIcon },
     { id: AppView.RECYCLE, label: '分类', icon: ScanIcon },
+    { id: AppView.QUIZ, label: '挑战', icon: BulbIcon }, // Added Quiz to main nav
     { id: AppView.GROWTH, label: '成长', icon: TrophyIcon }, 
     { id: AppView.COMMUNITY, label: '社区', icon: UsersIcon }, 
     { id: AppView.ADVICE, label: '顾问', icon: ChatIcon }, 
-    { id: AppView.PROFILE, label: '我的', icon: ProfileIcon }, // New
+    { id: AppView.PROFILE, label: '我的', icon: ProfileIcon },
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-100 pb-safe shadow-lg z-50 md:relative md:border-none md:bg-transparent md:shadow-none md:pb-0">
-      <div className="flex justify-around items-center h-16 max-w-lg mx-auto md:h-full md:flex-col md:justify-start md:space-y-2 md:p-4">
+    <nav className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-100 pb-safe shadow-lg z-50 md:relative md:border-none md:bg-transparent md:shadow-none md:pb-0 overflow-x-auto scrollbar-hide">
+      <div className="flex justify-between items-center h-16 min-w-max px-2 md:px-4 md:h-full md:flex-col md:justify-start md:space-y-2 md:min-w-0">
         
         {/* Desktop Logo */}
         <div className="hidden md:flex items-center gap-2 mb-8 px-4">
@@ -35,7 +36,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentView, onViewChange }) =>
             <button
               key={item.id}
               onClick={() => onViewChange(item.id)}
-              className={`flex flex-col md:flex-row items-center justify-center md:justify-start md:px-6 md:py-3 md:w-full rounded-xl transition-all duration-300 group
+              className={`flex flex-col md:flex-row items-center justify-center md:justify-start px-2 md:px-6 py-1 md:py-3 w-16 md:w-full rounded-xl transition-all duration-300 group flex-shrink-0
                 ${isActive 
                   ? 'text-leaf-600 md:bg-white md:shadow-md' 
                   : 'text-gray-400 hover:text-leaf-500 hover:bg-leaf-50'
