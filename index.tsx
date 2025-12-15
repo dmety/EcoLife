@@ -2,6 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 
+// Global error handler for script loading issues
+window.addEventListener('error', (event) => {
+  console.error("Global script error:", event);
+  const errorOverlay = document.getElementById('error-overlay');
+  const errorMessage = document.getElementById('error-message');
+  if (errorOverlay && errorMessage) {
+    errorOverlay.style.display = 'flex';
+    errorMessage.textContent = "运行错误: " + (event.message || "未知错误");
+  }
+});
+
 const rootElement = document.getElementById('root');
 
 if (!rootElement) {

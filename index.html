@@ -66,11 +66,12 @@
 {
   "imports": {
     "react": "https://esm.sh/react@18.2.0",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
     "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
     "@google/genai": "https://esm.sh/@google/genai@0.1.2",
-    "recharts": "https://esm.sh/recharts@2.12.7?external=react,react-dom",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/"
+    "recharts": "https://esm.sh/recharts@2.12.7?external=react,react-dom"
   }
 }
 </script>
@@ -80,6 +81,9 @@
     <div id="error-overlay">
         <h2 style="color: #e11d48; margin-bottom: 10px; font-weight: bold;">⚠️ 启动失败</h2>
         <p style="color: #4b5563;" id="error-message">应用加载遇到问题，请检查网络或控制台。</p>
+        <button onclick="window.location.reload()" style="margin-top: 15px; padding: 8px 16px; background-color: #e11d48; color: white; border: none; border-radius: 8px; cursor: pointer;">
+          重试
+        </button>
     </div>
   </body>
 </html>
